@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ku">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>RêyaMin</title>
+</head>
+<header>
+    <div class="section-one">
+    </div>
+    <div class="section-two">
+        رێیامن
+    </div>
+    <div class="section-three">
+        <button onclick="togglePopup(true);" style="background:none; border: none; ">
+        <img src="Imgs/Information.png" alt="" width="34" height="34">
+        </button>
+    </div>
+</header>
+<body class="body">
+    <div class="container">
+        <img src="Imgs/RêyaMin.png" alt="" width="220" height="120" style="margin: 0 auto;">
+     تو دشێی برێکا ئەپلیکەیشنێ رێیامن ئاریشەیا نوکە لهنداڤی تە مە پێ ئاگەهدار بکی برێکا ڤرێکرنا هندەک پێزانینان دگەل وێنەیەکێ
+    </div>
+    <form action="">
+    <div class="container">
+        پێزانینێن تە:
+    <input type="text" placeholder="ناڤ" class="input-default">
+    <div class="phone-box">
+    <div class="country-phone">
+        <img src="Imgs/Iraq-Flag.png" alt="" width="28" height="18">
+        +964
+    </div>
+    <input type="phone" placeholder="ژمارا موبایلێ" class="input-default" style="text-align: left; direction: ltr;">
+    </div>
+    <input type="email" placeholder="ئیمەیل" class="input-default">
+    
+    </div>
+    <div class="container">
+        پێزانین دەربارەی ئاریشەیێ:
+        <input type="text" placeholder="ناڤونیشانێ ئاریشێ" class="input-default">
+        <textarea style="height: 100px;" name="message" id="message" placeholder="پێزانین...." class="input-default" cols="25" rows="25"></textarea>
+    </div>
+    <div class="container">
+        وێنەیێن ئاریشەیێ:
+        <input type="file" name="photos" id="imageInput" accept="image/*" multiple>
+        <div id="previewContainer">
+    <div id="previewGallery" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px;"></div>
+</div>
+    </div>
+    <div class="container">
+        ئەڤ ئاریشە چ جۆرێ ئاریشێیە؟
+        <select name="" id="">
+            <option value="">ئاریشەیا جادەیێ</option>
+            <option value="">ئاریشەیا ئاڤێ</option>
+            <option value="">ئاریشەیا کارەبێ</option>
+        </select>
+    </div>
+    <div class="container-warning">
+        بەری تبلا خۆ لدگمەیا "هنارتن" بدی، ئەرێ ئەو پێزانینێن تو هنارتین ددرستن ئەم هیڤی دکین دووبارە پێداچوون بوو بهێتە کرن
+        <img src="Imgs/Warning-Icon.png" alt="">
+    </div>
+    <div class="container">
+    <button class="button-disable" onclick="">هنارتن</button>
+    </form>
+    </div>
+    <div class="pop-up" style="position: absolute;">
+        <div class="inner-pop-up">
+            <img src="Imgs/Information-icon.png" class="icon">
+            <div class="headtext">
+                ئاگاهدار بە!
+            </div>
+            <div class="subtext">
+               هەولاتیێ مە بکارهێنەرێ ڤی وەێبسایتی، ئەم هیڤی ژوە دکەین کو هین هاریکار بن دگەل مە بو پاراستنا باژێرەک جوان و پاراستی، هەروەسا دگەل مە هاریکار بە بو چارەسەرکرنا ئاریشەیان!
+            </div>
+            <button class="button-large" onclick="togglePopup(false);">بەردەوام بە</button>
+        </div>
+    </div>
+</body>
+</html>
+
+<script src="scripts.js">
+</script>
