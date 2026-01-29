@@ -1,9 +1,17 @@
 // Toggle Information Pop-up
+// Toggle Information Pop-up and Lock Scroll
 function togglePopup(show) {
     const popup = document.querySelector('.pop-up');
-    popup.style.display = show ? 'flex' : 'none';
-}
+    const body = document.body;
 
+    if (show) {
+        popup.style.display = 'flex';
+        body.classList.add('no-scroll'); // Locks the background
+    } else {
+        popup.style.display = 'none';
+        body.classList.remove('no-scroll'); // Restores scrolling
+    }
+}
 // Image Preview Gallery Logic
 document.getElementById('imageInput').addEventListener('change', function(event) {
     const gallery = document.getElementById('previewGallery');
