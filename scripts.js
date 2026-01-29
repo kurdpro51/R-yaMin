@@ -1,38 +1,30 @@
+// Toggle Information Pop-up
 function togglePopup(show) {
     const popup = document.querySelector('.pop-up');
-    
-    if (show) {
-        popup.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; 
-    } else {
-        popup.style.display = 'none';
-        document.body.style.overflow = 'auto';   
-    }
+    popup.style.display = show ? 'flex' : 'none';
 }
-const imageInput = document.getElementById('imageInput');
-  const gallery = document.getElementById('previewGallery');
 
-  imageInput.onchange = function(event) {
-    gallery.innerHTML = '';
-
+// Image Preview Gallery Logic
+document.getElementById('imageInput').addEventListener('change', function(event) {
+    const gallery = document.getElementById('previewGallery');
+    gallery.innerHTML = ''; // Clear previous previews
+    
     const files = event.target.files;
-
     if (files) {
-        Array.from(files).forEach(file => {
+        [...files].forEach(file => {
             const reader = new FileReader();
-
             reader.onload = function(e) {
+                const imgContainer = document.createElement('div');
+                imgContainer.style.cssText = "position:relative; width:80px; height:80px;";
+                
                 const img = document.createElement('img');
                 img.src = e.target.result;
-                img.style.width = '150px';
-                img.style.height = '150px';
-                img.style.objectFit = 'cover';
-                img.style.borderRadius = '8px';
+                img.style.cssText = "width:100%; height:100%; object-fit:cover; border-radius:8px; border:1px solid #ddd;";
                 
-                gallery.appendChild(img);
-            };
-
+                imgContainer.appendChild(img);
+                gallery.appendChild(imgContainer);
+            }
             reader.readAsDataURL(file);
         });
     }
-  };
+});
