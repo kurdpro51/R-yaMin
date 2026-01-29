@@ -1,493 +1,309 @@
+/* 1. Global Setup & Font */
 @font-face {
-  font-family: Kurdish-Font;
-  src: url(Rabar_021.ttf);
+    font-family: 'Kurdish-Font';
+    src: url('Rabar_021.ttf');
+    font-display: swap;
 }
 
-*{
+:root {
+    --primary: #004466;
+    --primary-light: #005461;
+    --bg-app: #F0F8FF;
+    --white: #ffffff;
+    --error: #FF3838;
+    --success: #73AF6F;
+    --warning: #FFC900;
+    --text-dark: #1a1a1a;
+    --text-muted: #636e72;
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 8px 24px rgba(0, 68, 102, 0.12);
+}
+
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Kurdish-Font', 'Segoe UI', Tahoma, sans-serif;
 }
 
-.splash-screen-body{
+body {
+    background-color: var(--bg-app);
+    direction: rtl; /* RTL Support for Kurdish */
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* 2. Splash Screen Page */
+.splash-screen-body {
     height: 100vh;
-    align-content: center;
-
-    background-color: #004466;
-}
-.splash-screen{
     display: flex;
-    align-items: center;
     justify-content: center;
-    align-content: center;
-    text-align: center;
-
-    flex-direction: column;
-
-    gap: 8px;
+    align-items: center;
+    background: linear-gradient(135deg, #004466 0%, #002233 100%);
+    overflow: hidden;
 }
 
-.splash-screen .text{
+.splash-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    animation: fadeIn 1.2s ease-out;
+}
+
+.splash-screen .text {
     color: white;
     font-weight: bold;
-    font-family: Kurdish-Font;
-
-    font-size: 4vh;
+    font-size: 2.5rem;
 }
 
-.splash-screen .subtext{
-    color: white;
-    font-family: Kurdish-Font;
-
-    font-size: 2vh;
-}
-
-.bottom{
+.splash-screen .subtext {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
     text-align: center;
-    position: absolute;
-    bottom: 0;
-
-    width: 100%;
-    margin-bottom: 10px;
-
-    font-size: 1.6vh;
-
-    color: white;
+    max-width: 80%;
 }
-.loading{
-    margin: 0;
+
+/* 3. Modern Pulse Loader */
+.loading {
     display: flex;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.loader {
+    width: 14px;
+    height: 14px;
+    background-color: white;
+    border-radius: 50%;
+    animation: pulse 0.6s infinite alternate;
+}
+
+.loader:nth-child(2) { animation-delay: 0.2s; }
+.loader:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes pulse {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0.3; transform: scale(0.8); }
+}
+
+/* 4. Navigation Header */
+header {
+    display: flex;
+    height: 70px;
+    background-color: var(--primary);
+    color: white;
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.section-one, .section-two, .section-three {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-two {
+    font-size: 1.3rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* 5. Inputs, Selects & Textareas */
+.input-default, .input-error, .input-correct, .input-warning, select, textarea {
+    width: 100%;
+    height: 55px;
+    border-radius: 14px;
+    padding: 0 16px;
+    margin: 10px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 2px solid #e0e6ed;
+    background: var(--white);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    outline: none;
+    color: var(--text-dark);
+}
+
+textarea.input-default {
+    height: 120px;
+    padding: 15px;
+    resize: none;
+}
+
+.input-default:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(0, 68, 102, 0.1);
+}
+
+.input-error { border-color: var(--error); background-color: #fffafa; }
+.input-correct { border-color: var(--success); background-color: #fafffa; }
+
+/* File Input Styling */
+input[type="file"] {
+    padding: 12px;
+    border: 2px dashed #ccd6dd;
+    background: #f8fafb;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* 6. Content Containers */
+.body .container {
+    background: var(--white);
+    border-radius: 18px;
+    margin: 15px;
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+.container-warning {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    background-color: #FFF9EB;
+    border-radius: 16px;
+    margin: 15px;
+    padding: 15px;
+    gap: 12px;
+    border: 1px solid rgba(255, 201, 0, 0.3);
+    font-size: 0.95rem;
+    color: #856404;
+}
+
+.container-warning img {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+}
+
+/* 7. Modern Buttons */
+[class^="button-"] {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: bold;
+    border: none;
+}
+
+.button-large {
+    width: 100%;
+    height: 58px;
+    background-color: var(--primary);
+    color: white;
+    border-radius: 14px;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 12px rgba(0, 68, 102, 0.2);
+}
+
+.button-large:hover {
+    background-color: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 68, 102, 0.3);
+}
+
+.button-disable {
+    width: 100%;
+    height: 58px;
+    background-color: #e0e6ed;
+    color: #a0aec0;
+    border-radius: 14px;
+    cursor: not-allowed;
+}
+
+/* 8. Phone Input Group */
+.phone-box {
+    display: flex;
+    flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
-}
-.loader {
-    border: 5px solid white;
-    border-radius: 50%;
-    margin: 8px;
-}
-
-.loader:nth-child(1) {
-    animation: loader 0.8s ease-in-out alternate infinite;
+    align-content: center;
+    gap: 10px;
+    margin: 10px 0;
+    width: 100%;
 }
 
-.loader:nth-child(2) {
-    animation: loader 0.8s ease-in-out .3s alternate infinite;
-}
-
-.loader:nth-child(3) {
-    animation: loader 0.8s ease-in-out 0.6s alternate infinite;
-}
-
-@keyframes loader {
-    to {
-        transform: scale(1.8);
-    }
-}
-
-
-header{
-    display: flex;
-    height: 66px;
-    background-color: #004466;
+.country-phone {
+    flex: 0 0 110px;
+    height: 55px;
+    background: var(--primary);
     color: white;
-    
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    direction: ltr;
+    font-weight: bold;
 }
 
-.section-one, .section-two, .section-three{
+/* 9. Pop-up Modal */
+.pop-up {
+    display: none; /* Controlled by JS */
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-
-    align-content: center;
-    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
     justify-content: center;
-}
-
-.section-two{
-    color: white;
-    font-weight: bold;
-    font-family: Kurdish-Font;
-
-    font-size: 2.4vh;
-}
-
-.input-default{
-    width: 100%;
-    height: 55px;
-    border-radius: 14px;
-    padding: 0 10px;
-    outline: 2px solid #004466;
-    border: none;
-    transition: 1px all ease;
-    background: none;
-    font-weight: bold;
-    font-size: 2vh;
-    margin: 8px auto;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
-    font-family: Kurdish-Font;
-    direction: rtl;
-    text-align: right;
-    box-sizing: border-box;
-}
-.input-default:focus{
-    outline: 3px solid #005461;
-}
-
-.input-error{
-    width: 100%;
-    height: 55px;
-    border-radius: 14px;
-    padding: 0 10px;
-    outline: 2px solid #FF3838;
-    border: none;
-    transition: 1px all ease;
-    background-color: rgb(207, 15, 15, 0.05);
-    font-weight: bold;
-    margin: 8px auto;
-    box-shadow: 
-  rgba(17, 17, 26, 0.05) 0px 4px 16px, 
-  rgba(17, 17, 26, 0.05) 0px 8px 32px, 
-  rgba(17, 17, 26, 0.03) 0px 16px 56px;
-    font-family: Kurdish-Font;
-    direction: rtl;
-    text-align: right;
-    box-sizing: border-box;
-}
-.input-error:focus{
-    outline: 3px solid #DC0000;
-}
-
-.input-correct{
-    width: 100%;
-    height: 55px;
-    border-radius: 14px;
-    padding: 0 10px;
-    outline: 2px solid #73AF6F;
-    border: none;
-    transition: 1px all ease;
-    background-color: rgb(0, 126, 110, 0.05);
-    font-weight: bold;
-    margin: 8px auto;
-    box-shadow: 
-  rgba(17, 17, 26, 0.05) 0px 4px 16px, 
-  rgba(17, 17, 26, 0.05) 0px 8px 32px, 
-  rgba(17, 17, 26, 0.03) 0px 16px 56px;
-    font-family: Kurdish-Font;
-    direction: rtl;
-    text-align: right;
-    box-sizing: border-box;
-}
-.input-correct:focus{
-    outline: 3px solid #007E6E;
-}
-
-.input-warning{
-    width: 100%;
-    height: 55px;
-    border-radius: 14px;
-    padding: 0 10px;
-    outline: 2px solid #FFC900;
-    border: none;
-    transition: 1px all ease;
-    background-color: rgb(255, 201, 0, 0.05);
-    font-weight: bold;
-    margin: 8px auto;
-    box-shadow: 
-  rgba(17, 17, 26, 0.05) 0px 4px 16px, 
-  rgba(17, 17, 26, 0.05) 0px 8px 32px, 
-  rgba(17, 17, 26, 0.03) 0px 16px 56px;
-    font-family: Kurdish-Font;
-    direction: rtl;
-    text-align: right;
-    box-sizing: border-box;
-}
-.input-warning:focus{
-    outline: 3px solid #FF9B00;
-}
-
-.body{
-    display: flex;
-    flex-direction: column;
-    background-color: #F0F8FF;
-}
-
-.body .container{
-    display: flex;
-    flex-direction: column;
-    direction: rtl;
-
-    background-color: white;
-    border-radius: 12px;
-    margin: 7px;
-    padding: 7px;
-
-    font-size: 2.2vh;
-
-    text-align: right;
-
-    font-family: Kurdish-Font;
-}
-
-.body .container-warning{
-    display: flex;
-    flex-direction: row;
-
-    background-color: #FFF9EB;
-    border-radius: 12px;
-    margin: 7px;
-    padding: 7px;
-
-    font-size: 2.2vh;
-
-    text-align: right;
-
-    font-family: Kurdish-Font;
-
-    gap: 5px;
-}
-
-.body .container-warning img{
-    width: 42px;
-    height: 42px;
-}
-
-
-.button-small{
-        width:90%;
-        height: 55px;
-        border-radius: 7px;
-        border: none;
-        background-color: #004466;
-        color: white;
-        transition: 0.5s all ease;
-        font-weight: bold;
-        font-size: 2.4vh;
-        font-family: Kurdish-Font;
-box-shadow: 
-  rgba(17, 17, 26, 0.05) 0px 4px 16px, 
-  rgba(17, 17, 26, 0.05) 0px 8px 32px, 
-  rgba(17, 17, 26, 0.03) 0px 16px 56px;
-}
-    .button-small:hover{
-        background-color: #005461;
-        cursor: pointer;
-    }
-    .button-medium{
-        width:20%;
-        height: 66px;
-        border-radius: 7px;
-        border: none;
-        background-color: #004466;
-        color: white;
-        transition: 0.5s all ease;
-        font-weight: bold;
-        font-size: 2.4vh;
-        font-family: Kurdish-Font;
-box-shadow: 
-  rgba(17, 17, 26, 0.05) 0px 4px 16px, 
-  rgba(17, 17, 26, 0.05) 0px 8px 32px, 
-  rgba(17, 17, 26, 0.03) 0px 16px 56px;
-    }
-    .button-medium:hover{
-        background-color: #005461;
-        cursor: pointer;
-    }
-    .button-large{
-        width:100%;
-        height: 66px;
-        border-radius: 7px;
-        border: none;
-        background-color: #004466;
-        color: white;
-        transition: 0.5s all ease;
-        font-weight: bold;
-        font-size: 2.4vh;
-        margin: 8px auto;
-        font-family: Kurdish-Font;
-box-shadow: 
-  rgba(17, 17, 26, 0.05) 0px 4px 16px, 
-  rgba(17, 17, 26, 0.05) 0px 8px 32px, 
-  rgba(17, 17, 26, 0.03) 0px 16px 56px;
-box-sizing: border-box;
-    }
-    .button-large:hover{
-        background-color: #005461;
-        cursor: pointer;
-        
-    }
-        .button-disable{
-        width:100%;
-        height: 66px;
-        border-radius: 7px;
-        border: 1px solid #D1D1D1;
-        background-color: #E0E0E0;
-        color: #9E9E9E;
-        transition: 0.5s all ease;
-        font-weight: bold;
-        font-size: 2.4vh;
-        margin: 8px auto;
-        font-family: Kurdish-Font;
-box-shadow: 
-  rgba(17, 17, 26, 0.05) 0px 4px 16px, 
-  rgba(17, 17, 26, 0.05) 0px 8px 32px, 
-  rgba(17, 17, 26, 0.03) 0px 16px 56px;
-box-sizing: border-box;
-    }
-        .button-small-border{
-        width:10%;
-        height: 66px;
-        border-radius: 7px;
-        border: none;
-        background:none;
-        border: 2px solid #004466;
-        color: #018790;
-        transition: 0.5s all ease;
-        font-weight: bold;
-        font-size: 2.4vh;
-        font-family: Kurdish-Font;
-box-shadow: 
-  rgba(17, 17, 26, 0.05) 0px 4px 16px, 
-  rgba(17, 17, 26, 0.05) 0px 8px 32px, 
-  rgba(17, 17, 26, 0.03) 0px 16px 56px;
-    }
-    .button-small-border:hover{
-        border: 2px solid #005461;
-        cursor: pointer;
-    }
-            .button-medium-border{
-        width:20%;
-        height: 66px;
-        border-radius: 7px;
-        border: none;
-        background:none;
-        border: 2px solid #004466;
-        color: #018790;
-        transition: 0.5s all ease;
-        font-weight: bold;
-        font-size: 2.4vh;
-        font-family: Kurdish-Font;
-box-shadow: 
-  rgba(17, 17, 26, 0.05) 0px 4px 16px, 
-  rgba(17, 17, 26, 0.05) 0px 8px 32px, 
-  rgba(17, 17, 26, 0.03) 0px 16px 56px;
-    }
-    .button-medium-border:hover{
-        border: 2px solid #005461;
-        cursor: pointer;
-    }
-                .button-large-border{
-        width:30%;
-        height: 66px;
-        border-radius: 7px;
-        border: none;
-        background:none;
-        border: 2px solid #004466;
-        color: #018790;
-        transition: 0.5s all ease;
-        font-weight: bold;
-        font-size: 2.4vh;
-        font-family: Kurdish-Font;
-box-shadow: 
-  rgba(17, 17, 26, 0.05) 0px 4px 16px, 
-  rgba(17, 17, 26, 0.05) 0px 8px 32px, 
-  rgba(17, 17, 26, 0.03) 0px 16px 56px;
-    }
-    .button-large-border:hover{
-        border: 2px solid #005461;
-        cursor: pointer;
-    }
-
-    .pop-up{
-        display: none;
-        position: relative;
-        width: 100%;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.5);
-    }
-
-    .pop-up .inner-pop-up{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        height: 40%;
-        width: 70%;
-        padding: 8px;
-        border-radius: 12px;
-        background-color: white;
-
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .pop-up .inner-pop-up .icon{
-        height: 75px;
-        width: 75px;
-        border-radius: 100%;
-    }
-    .pop-up .inner-pop-up .headtext{
-        font-size: 3vh;
-        font-family: Kurdish-Font;
-        color: #004466;
-        direction: rtl;
-    }
-    .pop-up .inner-pop-up .subtext{
-        text-align: center;
-        font-size: 2vh;
-        font-family: Kurdish-Font;
-        color: rgb(36, 36, 36);
-        padding: 1px 7px;
-        direction: rtl;
-    }
-
-    select{
-    width: 100%;
-    height: 55px;
-    border-radius: 14px;
-    padding: 0 10px;
-    outline: 2px solid #004466;
-    border: none;
-    transition: 1px all ease;
-    background: none;
-    font-weight: bold;
-    font-size: 2vh;
-    margin: 8px auto;
-    box-shadow: 
-  rgba(17, 17, 26, 0.05) 0px 4px 16px, 
-  rgba(17, 17, 26, 0.05) 0px 8px 32px, 
-  rgba(17, 17, 26, 0.03) 0px 16px 56px;
-    font-family: Kurdish-Font;
-    box-sizing: border-box;
-    }
-
-    .phone-box{
-        display: flex;
-        gap: 8px;
-        flex-direction: row-reverse;
-    }
-
-    .country-phone{
-        display: flex;
-    height: 55px;
-    border-radius: 14px;
-    padding: 0 10px;
-    outline: 2px solid #004466;
-    border: none;
-    background-color: #004466;
-    color: white;
-    font-weight: bold;
-    font-size: 2vh;
-    margin: 8px auto;
-    box-shadow: 
-  rgba(17, 17, 26, 0.05) 0px 4px 16px, 
-  rgba(17, 17, 26, 0.05) 0px 8px 32px, 
-  rgba(17, 17, 26, 0.03) 0px 16px 56px;
-    text-align: center;
     align-items: center;
-    justify-content: center;
-    gap: 5px;
-    direction: ltr;
-    }
+}
 
-    
+.inner-pop-up {
+    background: var(--white);
+    padding: 35px 25px;
+    border-radius: 28px;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
 
+.inner-pop-up .icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.inner-pop-up .headtext {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.inner-pop-up .subtext {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* 10. Footer Credits */
+.bottom {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    font-family: Arial, sans-serif;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
